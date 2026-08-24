@@ -76,7 +76,12 @@ export const Header = ({
           >
             {currentPoem?.title ?? "Нажмите для выбора"}
 
-            {currentPoem && <p>{currentCollections[0]?.name}</p>}
+            <div className={styles.collections}>
+              {currentPoem &&
+                currentCollections.map((collection) => (
+                  <p key={collection.name}>{collection.name}</p>
+                ))}
+            </div>
           </button>
 
           <a

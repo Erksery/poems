@@ -52,7 +52,7 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-
+      gap: 3px;
       height: 100%;
       padding-inline: 10px;
 
@@ -72,6 +72,20 @@
         margin: 0;
         font-size: 14px;
         color: gray;
+      }
+
+      .collections {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+
+        p {
+          padding: 1px 5px;
+
+          background-color: #26262640;
+          border: solid 2px rgba(47, 47, 47, 0.348);
+          border-radius: 5px;
+        }
       }
     }
 
