@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import clsx from "clsx";
 import styles from "./index.module.scss";
@@ -24,6 +24,31 @@ export const Header = ({
   nextPoem,
 }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+
+      if (
+        modalRef.current?.contains(target) ||
+        triggerRef.current?.contains(target)
+      ) {
+        return;
+      }
+
+      setIsOpen(false);
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
 
   return (
     <div className={styles.header_container}>
@@ -40,6 +65,7 @@ export const Header = ({
           </a>
 
           <button
+            ref={triggerRef}
             type="button"
             className={clsx(
               styles.poem_active,
@@ -67,8 +93,13 @@ export const Header = ({
 
       <div
         className={clsx(styles.poem_modal, isOpen && styles.poem_modal_open)}
+        onClick={() => setIsOpen(false)}
       >
-        <div className={styles.poem_modal_content}>
+        <div
+          ref={modalRef}
+          className={styles.poem_modal_content}
+          onClick={(event) => event.stopPropagation()}
+        >
           {collections?.map((collectionItem) => {
             const collectionPoems =
               collectionItem.id === "all"
@@ -87,6 +118,7 @@ export const Header = ({
 
                 <div className={styles.poem_list}>
                   <hr className={styles.tab} />
+
                   <div className={styles.list}>
                     {collectionPoems.map((poem) => (
                       <a

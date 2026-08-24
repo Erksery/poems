@@ -168,6 +168,10 @@
         display: flex;
         flex-direction: column;
         gap: 5px;
+
+        .poem_item_active {
+          color: darkred;
+        }
       }
     }
   }
