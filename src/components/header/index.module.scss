@@ -68,6 +68,15 @@
         background-color: rgba(40, 40, 40, 0.471);
       }
 
+      .title {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        width: 100%;
+      }
+
       p {
         margin: 0;
         font-size: 14px;
@@ -145,6 +154,8 @@
 }
 
 .poem_modal_content {
+  max-height: 450px;
+  overflow: auto;
   padding: 20px;
   padding-top: 10px;
 

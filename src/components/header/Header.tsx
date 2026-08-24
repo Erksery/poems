@@ -74,7 +74,9 @@ export const Header = ({
             onClick={() => setIsOpen((value) => !value)}
             aria-expanded={isOpen}
           >
-            {currentPoem?.title ?? "Нажмите для выбора"}
+            <span className={styles.title}>
+              {currentPoem?.title ?? "Нажмите для выбора"}
+            </span>
 
             <div className={styles.collections}>
               {currentPoem &&
