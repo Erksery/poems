@@ -3,6 +3,7 @@ title: "Последняя звезда"
 slug: "poslednyaya-zvezda"
 collections:
   - "sad-untruths"
+  - "fairy-tales"
 layout: "default"
 ---
 

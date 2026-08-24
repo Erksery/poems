@@ -5,6 +5,8 @@
 
 .content {
   position: absolute;
+  display: flex;
+  justify-content: center;
 
   top: 5rem;
   left: 0;
@@ -17,17 +19,20 @@
   overflow-y: auto;
   overflow-x: hidden;
 
-  * {
-    text-align: center;
-  }
+  .container {
+    width: fit-content;
 
-  h1 {
-    font-size: clamp(24px, 4vw, 48px);
-  }
+    * {
+      text-align: center;
+    }
 
-  p {
-    font-size: clamp(11px, 2vw, 24px);
+    h1 {
+      font-size: clamp(24px, 4vw, 48px);
+    }
 
-    white-space: nowrap;
+    p {
+      font-size: clamp(11px, 2vw, 24px);
+      line-height: 1.5;
+    }
   }
 }

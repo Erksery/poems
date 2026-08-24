@@ -8,7 +8,9 @@ interface PoemContentProps {
 export const PoemContent = ({ children }: PoemContentProps) => {
   return (
     <div className={styles.content_container}>
-      <div className={styles.content}>{children}</div>
+      <div className={styles.content}>
+        <div className={styles.container}>{children}</div>
+      </div>
     </div>
   );
 };

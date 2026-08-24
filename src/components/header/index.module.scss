@@ -26,6 +26,7 @@
   box-sizing: border-box;
 
   z-index: 2;
+  overflow: hidden;
 
   @media (max-width: 630px) {
     width: calc(100% - 30px);
@@ -42,7 +43,7 @@
       transition: 0.2s;
 
       &:not(.disabled):active {
-        background-color: rgb(40, 40, 40);
+        background-color: rgba(40, 40, 40, 0.521);
       }
     }
 
@@ -64,7 +65,7 @@
 
       &:active,
       &.poem_active_open {
-        background-color: rgb(40, 40, 40);
+        background-color: rgba(40, 40, 40, 0.471);
       }
 
       p {

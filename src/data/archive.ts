@@ -17,6 +17,7 @@ export interface Collection {
 export const collections: Collection[] = [
   { id: "fairy-tales", name: "Сказки" },
   { id: "sad-untruths", name: "Печальные неправды" },
+  { id: "obscene", name: "Матерные" },
 ];
 
 function toPoem(entry: CollectionEntry<"poems">): Poem {
@@ -32,7 +33,17 @@ function toPoem(entry: CollectionEntry<"poems">): Poem {
 export async function getPoems(): Promise<Poem[]> {
   const entries = await getCollection("poems");
 
-  return entries.map(toPoem);
+  return entries.map(toPoem).sort((a, b) => {
+    const aIndex = collections.findIndex((collection) =>
+      a.collections.includes(collection.id),
+    );
+
+    const bIndex = collections.findIndex((collection) =>
+      b.collections.includes(collection.id),
+    );
+
+    return aIndex - bIndex;
+  });
 }
 
 export async function getPoemsForCollection(

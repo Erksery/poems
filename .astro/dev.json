@@ -1,5 +1,5 @@
 {
-	"pid": 15272,
+	"pid": 9884,
 	"port": 4321,
 	"url": "http://localhost:4321",
 	"urls": {
@@ -8,13 +8,15 @@
 		],
 		"network": [
 			"http://192.168.0.3:4321/",
+			"http://192.168.137.1:4321/",
 			"http://172.22.80.1:4321/"
 		],
 		"networkInterfaceNames": [
 			"Беспроводная сеть",
+			"Подключение по локальной сети* 2",
 			"vEthernet (WSL (Hyper-V firewall))"
 		]
 	},
 	"background": false,
-	"startedAt": "2026-08-24T12:10:18.425Z"
+	"startedAt": "2026-08-24T17:41:24.707Z"
 }
