@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Pangolin&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --text: #f2f2f2;
+  --text-muted: rgba(242, 242, 242, 0.42);
+  --text-dim: rgba(242, 242, 242, 0.62);
+  --nav-width: 260px;
+  --reading-width: 38rem;
+  --ease-page: cubic-bezier(0.22, 1, 0.36, 1);
+  --font: "Pangolin", cursive;
+}
+
+html {
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a,
+div {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: rgba(242, 242, 242, 0.14);
+  color: var(--text);
+}

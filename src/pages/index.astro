@@ -1,11 +1,29 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import BookLayout from "@/layouts/BookLayout.astro";
+import { Header } from "@/components/header/Header";
+import "../styles/global.css"
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import {
+  collections,
+  getPoems,
+} from "@/data/archive";
+
+import { PoemContent } from "@/components/poems/PoemContent";
+
+const poems = await getPoems();
+
+const firstPoem = poems[0];
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BookLayout>
+  <Header
+    collections={collections}
+    poems={poems}
+    nextPoem={firstPoem}
+    client:load
+  />
+
+  <PoemContent>
+    <h1>Сборник стихов</h1>
+  </PoemContent>
+</BookLayout>

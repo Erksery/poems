@@ -1,0 +1,69 @@
+---
+import BookLayout from "@/layouts/BookLayout.astro";
+import { Header } from "@/components/header/Header";
+import type { CollectionEntry } from "astro:content";
+import { getCollection, render } from "astro:content";
+
+import {
+  collections,
+  getCollectionsForPoem,
+  getAdjacentPoems,
+  getPoems,
+} from "@/data/archive";
+
+import { PoemContent } from "@/components/poems/PoemContent";
+
+export async function getStaticPaths() {
+  const poems: CollectionEntry<"poems">[] =
+    await getCollection("poems");
+
+  return poems.map((poem) => ({
+    params: {
+      slug: poem.data.slug,
+    },
+    props: {
+      poem,
+    },
+  }));
+}
+
+interface Props {
+  poem: CollectionEntry<"poems">;
+}
+
+const { poem } = Astro.props;
+
+const poems = await getPoems();
+
+const { Content } = await render(poem);
+
+const poemData = {
+  id: poem.id,
+  slug: poem.data.slug,
+  title: poem.data.title,
+  collections: poem.data.collections,
+  layout: poem.data.layout,
+};
+
+const currentCollections = getCollectionsForPoem(poemData);
+
+const { previous, next } =
+  await getAdjacentPoems(poemData.slug);
+---
+
+<BookLayout>
+  <Header
+    collections={collections}
+    currentPoem={poemData}
+    currentCollections={currentCollections}
+    previousPoem={previous}
+    nextPoem={next}
+    poems={poems}
+    client:load
+  />
+
+  <PoemContent>
+    <h1>{poem.data.title}</h1>
+    <Content />
+  </PoemContent>
+</BookLayout>
