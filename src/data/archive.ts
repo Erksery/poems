@@ -1,8 +1,5 @@
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-import { type Collection, collections} from "./collections";
-export { collections } from "./collections";
-export type { Collection } from "./collections";
 
 export interface Poem {
   id: string;
@@ -12,6 +9,19 @@ export interface Poem {
   collections: string[];
   layout: "default" | "with-artwork";
 }
+
+export interface Collection {
+  id: string;
+  name: string;
+}
+
+export const collections: Collection[] = [
+  { id: "lunatic-hotel", name: "Отель Лунатика" },
+  { id: "kaleidoscope", name: "Калейдоскоп" },
+  { id: "soy-mirror", name: "Соевое Зеркало" },
+  { id: "golden-cockerel", name: "Золотой Петушок" },
+  { id: "misc", name: "Разное" },
+];
 
 function toPoem(entry: CollectionEntry<"poems">): Poem {
   return {

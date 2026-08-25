@@ -14,8 +14,7 @@ import {
 import { PoemContent } from "@/components/poems/PoemContent";
 
 export async function getStaticPaths() {
-  const poems: CollectionEntry<"poems">[] =
-    await getCollection("poems");
+  const poems: CollectionEntry<"poems">[] = await getCollection("poems");
 
   return poems.map((poem) => ({
     params: {
@@ -43,12 +42,12 @@ const poemData = {
   title: poem.data.title,
   collections: poem.data.collections,
   layout: poem.data.layout,
+  order: poem.data.order,
 };
 
 const currentCollections = getCollectionsForPoem(poemData);
 
-const { previous, next } =
-  await getAdjacentPoems(poemData.slug);
+const { previous, next } = await getAdjacentPoems(poemData.slug);
 ---
 
 <BookLayout>
