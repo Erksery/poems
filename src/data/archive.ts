@@ -1,30 +1,24 @@
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+import { type Collection, collections} from "./collections";
+export { collections } from "./collections";
+export type { Collection } from "./collections";
 
 export interface Poem {
   id: string;
   slug: string;
   title: string;
+  order: number;
   collections: string[];
   layout: "default" | "with-artwork";
 }
-
-export interface Collection {
-  id: string;
-  name: string;
-}
-
-export const collections: Collection[] = [
-  { id: "fairy-tales", name: "Сказки" },
-  { id: "sad-untruths", name: "Печальные неправды" },
-  { id: "obscene", name: "Матерные" },
-];
 
 function toPoem(entry: CollectionEntry<"poems">): Poem {
   return {
     id: entry.id,
     slug: entry.data.slug,
     title: entry.data.title,
+    order: entry.data.order,
     collections: entry.data.collections,
     layout: entry.data.layout,
   };
@@ -42,7 +36,11 @@ export async function getPoems(): Promise<Poem[]> {
       b.collections.includes(collection.id),
     );
 
-    return aIndex - bIndex;
+    if (aIndex !== bIndex) {
+      return aIndex - bIndex;
+    }
+
+    return a.order - b.order;
   });
 }
 

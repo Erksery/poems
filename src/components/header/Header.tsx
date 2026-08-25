@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import clsx from "clsx";
 import styles from "./index.module.scss";
-import type { Collection, Poem } from "@/data/archive";
+import type { Poem } from "@/data/archive";
+import type { Collection } from "@/data/collections";
 
 interface HeaderProps {
   collections?: Collection[];

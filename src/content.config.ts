@@ -11,6 +11,7 @@ const poems = defineCollection({
   schema: z.object({
     title: z.string(),
     slug: z.string(),
+    order: z.number().default(0),
     collections: z.array(z.string()),
     layout: z.enum(["default", "with-artwork"]).default("default"),
   }),
