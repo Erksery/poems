@@ -25,12 +25,26 @@
 
     p {
       white-space: nowrap;
-      font-size: clamp(12px, 4.2vw, 24px);
+      font-size: clamp(12px, 4.4vw, 24px);
       line-height: 1.5;
     }
 
     h1 {
-      font-size: clamp(32px, 5vw, 48px);
+      font-size: clamp(28px, 5vw, 48px);
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .content {
+    .container {
+      width: 100%;
+      min-width: 0;
+
+      p {
+        white-space: normal;
+        overflow-wrap: break-word;
+      }
     }
   }
 }
