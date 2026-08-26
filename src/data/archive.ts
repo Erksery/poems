@@ -23,7 +23,7 @@ export const collections: Collection[] = [
   { id: "misc", name: "Разное" },
 ];
 
-function toPoem(entry: CollectionEntry<"poems">): Poem {
+export function toPoem(entry: CollectionEntry<"poems">): Poem {
   return {
     id: entry.id,
     slug: entry.data.slug,
@@ -34,9 +34,12 @@ function toPoem(entry: CollectionEntry<"poems">): Poem {
   };
 }
 
+// Получение отсортированых стихов из папки poems
 export async function getPoems(): Promise<Poem[]> {
+  // getCollection - метод astro для получения данных из папки, детали в content.config.ts
   const entries = await getCollection("poems");
 
+  // Сортировка: сравниваются два cтиха по идексу
   return entries.map(toPoem).sort((a, b) => {
     const aIndex = collections.findIndex((collection) =>
       a.collections.includes(collection.id),
@@ -54,11 +57,13 @@ export async function getPoems(): Promise<Poem[]> {
   });
 }
 
+// Получаем список стихов для одной категории
 export async function getPoemsForCollection(
   collectionId: string,
 ): Promise<Poem[]> {
   const poems = await getPoems();
 
+  // Если в будущем появится категория "Все"
   if (collectionId === "all") {
     return poems;
   }
@@ -66,18 +71,21 @@ export async function getPoemsForCollection(
   return poems.filter((poem) => poem.collections.includes(collectionId));
 }
 
+// Получение категории для стиха
 export function getCollectionsForPoem(poem: Poem): Collection[] {
   return collections.filter((collection) =>
     poem.collections.includes(collection.id),
   );
 }
 
+// Получение стиха по тегу (нужно для русских названий)
 export async function getPoemBySlug(slug: string): Promise<Poem | undefined> {
   const poems = await getPoems();
 
   return poems.find((poem) => poem.slug === slug);
 }
 
+// Получение соседних стихов для навигации
 export async function getAdjacentPoems(
   currentSlug: string,
   collectionId = "all",

@@ -9,6 +9,7 @@ import {
   getCollectionsForPoem,
   getAdjacentPoems,
   getPoems,
+  toPoem,
 } from "@/data/archive";
 
 import { PoemContent } from "@/components/poems/PoemContent";
@@ -36,14 +37,7 @@ const poems = await getPoems();
 
 const { Content } = await render(poem);
 
-const poemData = {
-  id: poem.id,
-  slug: poem.data.slug,
-  title: poem.data.title,
-  collections: poem.data.collections,
-  layout: poem.data.layout,
-  order: poem.data.order,
-};
+const poemData = toPoem(poem);
 
 const currentCollections = getCollectionsForPoem(poemData);
 
